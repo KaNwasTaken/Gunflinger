@@ -11,11 +11,14 @@ public class Phases : MonoBehaviour
         Aiming,
         Shooting,
         Waiting,
-        Finished
+        Finished,
+        Victory,
+        Defeat
     }
     public static GamePhase currentPhase;
     public static bool IsPaused;
     public GameObject pauseMenu;
+    public static bool GameOver;
 
 
     // Start is called before the first frame update
@@ -30,6 +33,7 @@ public class Phases : MonoBehaviour
         {
             instance = this;
         }
+        GameOver = false;
 
         Application.targetFrameRate = 60;
 

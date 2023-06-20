@@ -21,12 +21,14 @@ public class Objectives : MonoBehaviour
         if (objectivesLeft <= 0)
         {
             Debug.Log("win");
-            Phases.currentPhase = Phases.GamePhase.Finished;
+            Phases.currentPhase = Phases.GamePhase.Victory;
+            Phases.GameOver = true;
         }
-        if (cannonballsLeft <= 0 && Phases.currentPhase == Phases.GamePhase.Aiming)
+        if (cannonballsLeft <= 0 && Phases.currentPhase == Phases.GamePhase.Waiting && objectivesLeft > 0)
         {
             Debug.Log("lose");
-            Phases.currentPhase = Phases.GamePhase.Finished;
+            Phases.currentPhase = Phases.GamePhase.Defeat;
+            Phases.GameOver = true;
         }
     }
 }

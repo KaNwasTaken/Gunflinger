@@ -21,12 +21,15 @@ public class BallFollowCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Phases.currentPhase == Phases.GamePhase.Shooting || Phases.currentPhase == Phases.GamePhase.Waiting) 
+        if (Phases.currentPhase == Phases.GamePhase.Shooting || Phases.currentPhase == Phases.GamePhase.Waiting || Phases.GameOver) 
         {
             cannonball = ShootScript.shotball;
             //transform.position = Vector3.Lerp(transform.position, cannonball.transform.position, cameraSpeed);
-            transform.position = Vector3.SmoothDamp(transform.position, cannonball.transform.position, ref velocity, cameraSpeed);
-            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            if (cannonball != null) {
+                transform.position = Vector3.SmoothDamp(transform.position, cannonball.transform.position, ref velocity, cameraSpeed);
+                transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            }
+
         }
         if (Phases.currentPhase == Phases.GamePhase.Aiming)
         {

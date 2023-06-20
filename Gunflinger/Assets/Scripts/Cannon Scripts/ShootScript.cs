@@ -9,6 +9,7 @@ public class ShootScript : MonoBehaviour
     public Transform parentTransform;
     public static GameObject shotball;
     public float ballSpin;
+    public AudioSource shootSound;
     Animator anim;
     ParticleSystem particle;
 
@@ -50,5 +51,6 @@ public class ShootScript : MonoBehaviour
         //animation and particles
         anim.SetTrigger("Shoot");
         particle.Play();
+        shootSound.Play();
     }
 }

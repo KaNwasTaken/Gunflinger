@@ -9,7 +9,7 @@ public class WaitingScript : MonoBehaviour
 
     private void Update()
     {
-        if (Phases.currentPhase == Phases.GamePhase.Waiting)
+        if (Phases.currentPhase == Phases.GamePhase.Waiting && !Phases.GameOver)
         {
             if (waiting)
             {
@@ -28,8 +28,15 @@ public class WaitingScript : MonoBehaviour
     IEnumerator WaitingCoroutine()
     {
         yield return new WaitForSeconds(waitTime);
-        Destroy(GameObject.FindGameObjectWithTag("CannonBall"));
+        if (!Phases.GameOver)
+        {
         Phases.currentPhase = Phases.GamePhase.Aiming;
+        }
+
+        if (Objectives.cannonballsLeft > 0)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("CannonBall"));
+        }
         yield return null;
     }
 }
