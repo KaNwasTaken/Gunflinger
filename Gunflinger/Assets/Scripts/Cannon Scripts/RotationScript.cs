@@ -28,8 +28,14 @@ public class RotationScript : MonoBehaviour
                 {
                     mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 }
-            }
 
+
+            }
+            //Debug Key: T
+            if (Input.GetKey(KeyCode.T))
+            {
+                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
 
             Vector3 difference = mousePosition - transform.position;
 

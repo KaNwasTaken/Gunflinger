@@ -11,6 +11,7 @@ TagManager:
   - Block
   - Button
   - Money
+  - Music Manager
   layers:
   - Default
   - TransparentFX

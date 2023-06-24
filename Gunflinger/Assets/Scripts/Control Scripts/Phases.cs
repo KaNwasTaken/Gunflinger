@@ -35,8 +35,6 @@ public class Phases : MonoBehaviour
         }
         GameOver = false;
 
-        Application.targetFrameRate = 60;
-
         IsPaused = false;
         currentPhase = GamePhase.Aiming;
     }

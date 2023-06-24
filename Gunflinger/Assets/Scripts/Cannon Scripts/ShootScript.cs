@@ -51,6 +51,8 @@ public class ShootScript : MonoBehaviour
         //animation and particles
         anim.SetTrigger("Shoot");
         particle.Play();
+
+        shootSound.volume = AudioVolumeData.SFXValue;
         shootSound.Play();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Moneycollect : MonoBehaviour
 {
     public ParticleSystem particles;
-
+    public AudioSource collectAudio;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -13,6 +13,8 @@ public class Moneycollect : MonoBehaviour
         {
             Objectives.objectivesLeft -= 1;
             particles.Play();
+            collectAudio.Play();
+
             Destroy(gameObject.GetComponent<SpriteRenderer>());
             Destroy(gameObject.GetComponent<Collider2D>());
             Destroy(gameObject.GetComponent<Rigidbody2D>());

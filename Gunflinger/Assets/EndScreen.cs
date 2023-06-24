@@ -7,6 +7,7 @@ public class EndScreen : MonoBehaviour
 {
     public GameObject victoryScreen;
     public GameObject defeatScreen;
+    public GameObject ingameButtons;
 
     public TextMeshProUGUI victoryTimer;
     public TextMeshProUGUI defeatTimer;
@@ -49,6 +50,7 @@ public class EndScreen : MonoBehaviour
         }
 
         defeatScreen.SetActive(true);
+        ingameButtons.SetActive(false);
         defeatAnim.SetTrigger("DefeatScreen");
         defeatTimer.text = "Time: " + timer.ToString("F2") + "s";
     }
@@ -62,6 +64,7 @@ public class EndScreen : MonoBehaviour
         }
 
         victoryScreen.SetActive(true);
+        ingameButtons.SetActive(false);
         victoryAnim.SetTrigger("VictoryScreen");
         victoryTimer.text = "Time: " + timer.ToString("F2") + "s";
     }

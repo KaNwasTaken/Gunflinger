@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject ingameButtons;
     public Animator anim;
 
-    //Remember that DisableUI controls disabling of the firebutton on pause, and on change of phase
+    //Remember that DisableUI controls disabling of the firebutton on change of phase
 
     void Update()
     {
