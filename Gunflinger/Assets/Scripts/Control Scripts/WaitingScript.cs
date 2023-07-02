@@ -33,7 +33,7 @@ public class WaitingScript : MonoBehaviour
         Phases.currentPhase = Phases.GamePhase.Aiming;
         }
 
-        if (Objectives.cannonballsLeft > 0)
+        if (Objectives.totalCannonballsLeft > 0)
         {
             Destroy(GameObject.FindGameObjectWithTag("CannonBall"));
         }

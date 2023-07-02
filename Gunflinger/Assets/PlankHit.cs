@@ -10,6 +10,7 @@ public class PlankHit : MonoBehaviour
     public int health = 50;
     public AudioSource hitAudio;
     int currentHp;
+    public float destroyObjectDelay = 0.1f;
 
 
     private void Start()
@@ -21,21 +22,37 @@ public class PlankHit : MonoBehaviour
     {
 
 
-        if (collision.gameObject.CompareTag("CannonBall") && collision.relativeVelocity.magnitude > threshold)
+        if (/*collision.gameObject.CompareTag("CannonBall") &&*/ collision.relativeVelocity.magnitude > threshold)
         {
-            currentHp -= (int)collision.relativeVelocity.magnitude;
+            currentHp -= Mathf.RoundToInt(collision.relativeVelocity.magnitude * CannonballManager.currentCannonball.damageModifier);
 
             if (currentHp <= 0) 
             {
                 particle.Play();
-                hitAudio.volume = AudioVolumeData.SFXValue;
+                hitAudio.volume *= AudioVolumeData.SFXValue;
                 hitAudio.Play();
 
 
                 Destroy(GetComponent<BoxCollider2D>());
                 Destroy(GetComponent<SpriteRenderer>());
-                Destroy(gameObject, 0.1f);
+                Destroy(gameObject, destroyObjectDelay);
+            }
+
+            float healthPercent = Mathf.Clamp((float)currentHp / health, 0.5f, 1);
+
+            if (gameObject.GetComponent<SpriteRenderer>() != null)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(healthPercent, healthPercent, healthPercent, 1);
             }
         }
     }
+    /*private void Update()
+    {
+        float healthPercent = (float)currentHp / health;
+
+            if (gameObject.GetComponent<SpriteRenderer>() != null)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(healthPercent, healthPercent, healthPercent, 1);
+            }
+    }*/
 }

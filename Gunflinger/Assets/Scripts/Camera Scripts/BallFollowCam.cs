@@ -10,6 +10,7 @@ public class BallFollowCam : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public Vector3 offset;
     Vector3 cannonPosition;
+    public Transform scoutTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,12 @@ public class BallFollowCam : MonoBehaviour
         if (Phases.currentPhase == Phases.GamePhase.Aiming)
         {
             transform.position = Vector3.Lerp(transform.position, cannonPosition, Time.deltaTime * returnSpeed);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        }
+
+        if (Phases.currentPhase == Phases.GamePhase.Scouting)
+        {
+            transform.position = Vector3.Lerp(transform.position, scoutTarget.position, Time.deltaTime * returnSpeed);
             transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         }
     }

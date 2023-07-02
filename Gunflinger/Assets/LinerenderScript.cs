@@ -12,17 +12,20 @@ public class LinerenderScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+        if (Phases.currentPhase == Phases.GamePhase.Aiming) 
+        { 
+            if (Input.touchCount > 0)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    DrawLine();
+                }
+            }
+
+            if (Input.GetKey(KeyCode.T))
             {
                 DrawLine();
             }
-        }
-
-        if (Input.GetKey(KeyCode.T))
-        {
-            DrawLine();
         }
     }
 
@@ -40,15 +43,17 @@ public class LinerenderScript : MonoBehaviour
 
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0f;
-            Vector3 difference = mousePosition - lineRenderer.transform.position;
+            /*Vector3 difference = mousePosition - lineRenderer.transform.position;
+            Debug.Log(mousePosition);
 
-            float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-            Debug.Log(angle);
-            if (angle <= 92 && angle >= 0)
-            {
-                lineRenderer.SetPosition(1, mousePosition);
-            }
+            float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;*/
+
+            //if (angle <= 92 && angle >= 0)
+            Vector3 clampedMousePosition = new Vector3(Mathf.Clamp(mousePosition.x, gameObject.transform.position.x, float.PositiveInfinity), Mathf.Clamp(mousePosition.y, gameObject.transform.position.y, float.PositiveInfinity), 0);
+
+            lineRenderer.SetPosition(1, clampedMousePosition);
+
             lineRenderer.SetPosition(0, startPoint.position);
         }
 

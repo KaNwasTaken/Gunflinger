@@ -5,16 +5,18 @@ using UnityEngine;
 public class BackgroundMusicScript : MonoBehaviour
 {
     public AudioLowPassFilter lowPassFilter;
+    public AudioSource musicSource;
+    float defaultVolume;
 
     private void Update()
     {
         if (Phases.currentPhase == Phases.GamePhase.Aiming || Phases.GameOver)
         {
-            lowPassFilter.enabled = false;
+            lowPassFilter.cutoffFrequency = 10000;
         }
         else
         {
-            lowPassFilter.enabled = true;
+            lowPassFilter.cutoffFrequency = 700;
         }
     }
 }

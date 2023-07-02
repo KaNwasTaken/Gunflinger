@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285bfc9a3db7cbc4f8b7ad0960e13672, type: 3}
+  m_Name: Default Cannonball
+  m_EditorClassIdentifier: 
+  cannonballPrefab: {fileID: 2423161981278043068, guid: cb2ac2339e390d044b56a59a41ca138a, type: 3}
+  cannonballDisplayimage: {fileID: 21300000, guid: 4f1e00008b6e36b439a7492a1e3c1af5, type: 3}
+  damageModifier: 1

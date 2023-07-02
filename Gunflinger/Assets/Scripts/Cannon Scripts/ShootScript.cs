@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootScript : MonoBehaviour
 {
-    public GameObject cannonball;
+    //public GameObject cannonball;
     public float cannonForce = 5;
     public Transform parentTransform;
     public static GameObject shotball;
@@ -20,19 +20,14 @@ public class ShootScript : MonoBehaviour
         particle = GameObject.FindGameObjectWithTag("CannonParticle").GetComponent<ParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Fire()
     {
         if (Phases.currentPhase == Phases.GamePhase.Aiming)
         {
-            if (Objectives.cannonballsLeft > 0)
+            if (SelectedCannonballCount() > 0)
             {
                 Shoot();
-                Objectives.cannonballsLeft -= 1;
+                DecrementCannonball(1);
             }
 
         }
@@ -41,7 +36,7 @@ public class ShootScript : MonoBehaviour
     private void Shoot()
     {
         //add force to ball
-        shotball = Instantiate(cannonball, transform.position, parentTransform.rotation);
+        shotball = Instantiate(CannonballManager.currentCannonball.cannonballPrefab, transform.position, parentTransform.rotation);
         shotball.GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.right * cannonForce, ForceMode2D.Impulse);
         shotball.GetComponent<Rigidbody2D>().AddTorque(ballSpin, ForceMode2D.Impulse);
 
@@ -54,5 +49,39 @@ public class ShootScript : MonoBehaviour
 
         shootSound.volume = AudioVolumeData.SFXValue;
         shootSound.Play();
+    }
+    void DecrementCannonball(int integer)
+    {
+        switch (CannonballManager.currentCannonball.name)
+        {
+            case "Default Cannonball":
+                Objectives.cannonballCount -= integer;
+                break;
+            case "Fireball":
+                Objectives.fireballCount -= integer;
+                break;
+
+        }
+    }
+    int SelectedCannonballCount()
+    {
+        int returnValue;
+
+            switch (CannonballManager.currentCannonball.name)
+            {
+                case "Default Cannonball":
+                    returnValue = Objectives.cannonballCount;
+                    break;
+
+                case "Fireball":
+                    returnValue = Objectives.fireballCount;
+                    break;
+
+                default:
+                    returnValue = 0;
+                    break;
+                
+            }
+        return returnValue;
     }
 }

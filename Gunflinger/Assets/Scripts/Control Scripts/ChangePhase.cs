@@ -16,12 +16,15 @@ public class ChangePhase : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.magnitude < 0 + stopThreshold && checkifstopped)
+        if (rb != null)
         {
-            if (!Phases.GameOver)
+            if (rb.velocity.magnitude < 0 + stopThreshold && checkifstopped)
             {
-                Phases.currentPhase = Phases.GamePhase.Waiting;
-                checkifstopped = false;
+                if (!Phases.GameOver)
+                {
+                    Phases.currentPhase = Phases.GamePhase.Waiting;
+                    checkifstopped = false;
+                }
             }
         }
     }

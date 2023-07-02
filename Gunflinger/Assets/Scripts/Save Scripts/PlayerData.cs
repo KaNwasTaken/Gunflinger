@@ -31,4 +31,14 @@ public class PlayerData
         PlayerPrefs.SetFloat("Music level", f);
     }
 
+    public static int LoadSavedCannonUpgradeIndex()
+    {
+        return PlayerPrefs.GetInt("CannonUpgradeIndex", 0);
+    }
+
+    public static void SaveCannonUpgradeIndex(int integer)
+    {
+        PlayerPrefs.SetInt("CannonUpgradeIndex", integer);
+    }
+
 }

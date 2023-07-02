@@ -9,9 +9,9 @@ public class Phases : MonoBehaviour
     public enum GamePhase
     {
         Aiming,
+        Scouting,
         Shooting,
         Waiting,
-        Finished,
         Victory,
         Defeat
     }
