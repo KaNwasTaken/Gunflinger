@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 2423161981278043068, guid: 839c492275859324da634fae37c1b259, type: 3}
   cannonballDisplayimage: {fileID: 21300000, guid: 53d90b7387703f943b92773498dc04e9, type: 3}
-  damageModifier: 1.5
+  damageModifier: 1000

@@ -12,6 +12,7 @@ public class ShootScript : MonoBehaviour
     public AudioSource shootSound;
     Animator anim;
     ParticleSystem particle;
+    public CannonballManager cannonballManager;
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +57,22 @@ public class ShootScript : MonoBehaviour
         {
             case "Default Cannonball":
                 Objectives.cannonballCount -= integer;
+                cannonballManager.cannonballUIText.text = Objectives.cannonballCount.ToString();
                 break;
+
             case "Fireball":
                 Objectives.fireballCount -= integer;
+                cannonballManager.fireballUIText.text = Objectives.fireballCount.ToString();
+                break;
+
+            case "Bouncyball":
+                Objectives.bouncyballCount -= integer;
+                cannonballManager.bouncyballUIText.text = Objectives.bouncyballCount.ToString();
+                break;
+
+            case "Anticannonball":
+                Objectives.anticannonballCount -= integer;
+                cannonballManager.anticannonballUIText.text = Objectives.anticannonballCount.ToString();
                 break;
 
         }
@@ -75,6 +89,14 @@ public class ShootScript : MonoBehaviour
 
                 case "Fireball":
                     returnValue = Objectives.fireballCount;
+                    break;
+
+                case "Bouncyball":
+                    returnValue = Objectives.bouncyballCount;
+                    break;
+
+                case "Anticannonball":
+                    returnValue = Objectives.anticannonballCount;
                     break;
 
                 default:

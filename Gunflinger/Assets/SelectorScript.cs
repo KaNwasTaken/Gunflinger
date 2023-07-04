@@ -10,6 +10,8 @@ public class SelectorScript : MonoBehaviour
     public Color color;
     [SerializeField] bool CannonballSelect = false;
     [SerializeField] bool FireballSelect = false;
+    [SerializeField] bool BouncyballSelect = false;
+    [SerializeField] bool AnticannonballSelect = false;
 
     private void Start()
     {
@@ -25,6 +27,13 @@ public class SelectorScript : MonoBehaviour
 
         if (FireballSelect)
             CannonballManager.SelectFireball();
+
+        if (BouncyballSelect)
+            CannonballManager.SelectBouncyball();
+
+        if (AnticannonballSelect)
+            CannonballManager.SelectAnticannonball();
+
     }
     private void Update()
     {
@@ -51,6 +60,28 @@ public class SelectorScript : MonoBehaviour
                 {
                     buttonImage.color = color;
                 }
+        }
+        if (BouncyballSelect)
+        {
+            if (CannonballManager.currentCannonball.name == "Bouncyball")
+            {
+                buttonImage.color = Color.white;
+            }
+            else
+            {
+                buttonImage.color = color;
+            }
+        }
+        if (AnticannonballSelect)
+        {
+            if (CannonballManager.currentCannonball.name == "Anticannonball")
+            {
+                buttonImage.color = Color.white;
+            }
+            else
+            {
+                buttonImage.color = color;
+            }
         }
     }
 }

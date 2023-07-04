@@ -6,8 +6,6 @@ public class CannonballInventory : MonoBehaviour
 {
     public CannonballObject[] cannonballsArray;
 
-    public static GameObject selectedCannonballPrefab;
-
     private void Update()
     {
         /*switch (CannonballManager.currentCannonball)

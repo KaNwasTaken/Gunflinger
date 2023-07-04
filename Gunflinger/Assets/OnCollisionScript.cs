@@ -7,9 +7,17 @@ public class OnCollisionScript : MonoBehaviour
 
     public AudioSource thudSound;
 
-    public bool explodeOnContact = false;
+    public bool explodeOnContact;
+    public bool bounceOnContact;
+
     public Animator explosionAnim;
     public AudioSource explosionSound;
+
+    public AudioSource bounceSound;
+    public AudioSource fizzle;
+    public ParticleSystem fizzleParticle;
+
+    int bounceCounter = 3;
 
     private void Start()
     {
@@ -18,10 +26,26 @@ public class OnCollisionScript : MonoBehaviour
 
         if (explosionSound != null)
         explosionSound.volume *= PlayerData.LoadSFXLevel();
+
+        if (bounceSound != null)
+            bounceSound.volume *= PlayerData.LoadSFXLevel();
+
+        if (fizzle != null)
+            bounceSound.volume *= PlayerData.LoadSFXLevel();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        if (collision.gameObject.CompareTag("Ground") && !explodeOnContact)
+        {
+
+            if (collision.relativeVelocity.magnitude > 10)
+            {
+                thudSound.Play();
+            }
+        }
+
         if (explodeOnContact)
         {
             explodeOnContact = false;
@@ -37,22 +61,33 @@ public class OnCollisionScript : MonoBehaviour
 
             Invoke(nameof(DeleteSelf), 2);
         }
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            if (collision.relativeVelocity.magnitude > 10)
-            {
-                thudSound.Play();
-            }
-        }
+
+
 
     }
 
-    /*void AddExplosionForce2D(Vector3 explosionOrigin, float explosionForce, float explosionRadius)
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (bounceOnContact)
         {
-            Vector3 direction = transform.position - explosionOrigin;
-            float forceFalloff = 1 - (direction.magnitude / explosionRadius);
-            GetComponent<Rigidbody2D>().AddForce(direction.normalized * (forceFalloff <= 0 ? 0 : explosionForce) * forceFalloff);
-        }*/
+            if (bounceCounter > 0)
+            {
+                bounceCounter -= 1;
+                bounceSound.Play();
+            }
+            else
+            {
+                fizzle.Play();
+                fizzleParticle.Play();
+
+                Destroy(GetComponent<Rigidbody2D>());
+                Destroy(GetComponent<SpriteRenderer>());
+                Destroy(GetComponent<BoxCollider2D>());
+
+                Invoke(nameof(DeleteSelf), 2f );
+            }
+        }
+    }
 
     void AddExplosionForce2D()
     {

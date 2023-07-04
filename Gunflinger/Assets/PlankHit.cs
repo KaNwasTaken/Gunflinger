@@ -22,11 +22,28 @@ public class PlankHit : MonoBehaviour
     {
 
 
-        if (/*collision.gameObject.CompareTag("CannonBall") &&*/ collision.relativeVelocity.magnitude > threshold)
+        if (collision.relativeVelocity.magnitude > threshold)
         {
-            currentHp -= Mathf.RoundToInt(collision.relativeVelocity.magnitude * CannonballManager.currentCannonball.damageModifier);
+            if (collision.gameObject.CompareTag("CannonBall"))
+            {
+                currentHp -= Mathf.RoundToInt(collision.relativeVelocity.magnitude * CannonballManager.currentCannonball.damageModifier);
+            }
+            else
+            {
+                if (gameObject != null && collision.rigidbody != null)
+                {
+                    //Debug.Log(gameObject + " " + collision.gameObject);
+                    currentHp -= Mathf.RoundToInt(collision.relativeVelocity.magnitude * collision.rigidbody.mass * 0.25f);
+                }
+                else if (gameObject != null)
+                {
+                    //Debug.Log(gameObject + " " + collision.gameObject);
+                    currentHp -= Mathf.RoundToInt(collision.relativeVelocity.magnitude);
 
-            if (currentHp <= 0) 
+                }
+            }
+
+            if (currentHp <= 0)
             {
                 particle.Play();
                 hitAudio.volume *= AudioVolumeData.SFXValue;
@@ -35,6 +52,8 @@ public class PlankHit : MonoBehaviour
 
                 Destroy(GetComponent<BoxCollider2D>());
                 Destroy(GetComponent<SpriteRenderer>());
+                Destroy(GetComponent<Rigidbody2D>());
+
                 Destroy(gameObject, destroyObjectDelay);
             }
 
@@ -44,15 +63,7 @@ public class PlankHit : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().color = new Color(healthPercent, healthPercent, healthPercent, 1);
             }
+            
         }
     }
-    /*private void Update()
-    {
-        float healthPercent = (float)currentHp / health;
-
-            if (gameObject.GetComponent<SpriteRenderer>() != null)
-            {
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(healthPercent, healthPercent, healthPercent, 1);
-            }
-    }*/
 }
