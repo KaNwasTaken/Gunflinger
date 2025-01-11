@@ -1,4 +1,6 @@
 # Gunflinger
 Game Made by K
 
-Still in development
+Was in development
+
+Scrapped because of personal disappointment with the code.
